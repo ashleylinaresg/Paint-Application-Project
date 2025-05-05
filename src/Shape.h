@@ -11,13 +11,8 @@ public:
     // This function is now pure virtual
     virtual void draw() = 0;
 
-    // Since Shape contains at least one pure virtual function
-    // Shape is an Abstract Data Type
+   // virtual bool contains(float mx, float my) = 0;
 
-    // This forces every child of Shape to have a draw
-    // function implemented
-
-    // Any ADT must have a virtual destructor
     virtual ~Shape(){}
 };
 

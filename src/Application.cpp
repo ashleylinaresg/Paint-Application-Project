@@ -7,6 +7,8 @@ using namespace std;
 
 void Application::onCanvasMouseDown(bobcat::Widget* sender, float mx, float my) {
     TOOL tool        = toolbar->getTool();
+    //std::cout << "Selected tool: " << tool << std::endl; // Debugging output
+
     Color color      = selector->getColor();
     float  r         = color.getR();
     float  g         = color.getG();
@@ -36,10 +38,9 @@ void Application::onCanvasMouseDown(bobcat::Widget* sender, float mx, float my) 
         canvas->redraw();
     }
     else if (tool == POLYGON) {
-        // default to, say, a hexagon of radius 0.2
-        int   sides  = 6;
-        float radius = 0.2f;
-        canvas->addPolygon(mx, my, sides, radius, r, g, b);
+        //std::cout << "Polygon tool selected at (" << mx << ", " << my << ")" << std::endl; // Debugging output
+        //Color color = selector->getColor();
+        canvas->addPolygon(mx, my, color.getR(), color.getG(), color.getB());
         canvas->redraw();
     }
 }

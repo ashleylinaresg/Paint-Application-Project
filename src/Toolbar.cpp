@@ -53,8 +53,10 @@ void Toolbar::onClick(bobcat::Widget* sender) {
     }
     else if (sender == rectangleButton) {
         tool = RECTANGLE;
-    }else if (sender == polygonButton) {
+    }
+    else if (sender == polygonButton) {
         tool = POLYGON;
+       // std::cout << "Polygon tool selected" << std::endl; // Debugging output
     }
     else if (sender == undoButton) {
         action = UNDO;
@@ -86,8 +88,8 @@ Toolbar::Toolbar(int x, int y, int w, int h) : Group(x, y, w, h) {
     triangleButton = new Image(x, y + 150, 50, 50, "./assets/triangle.png");
     rectangleButton = new Image(x, y + 200, 50, 50, "./assets/rectangle.png");
     polygonButton = new Image(x, y + 250, 50, 50, "./assets/polygon.png");
-    undoButton = new Image(x, y + 250, 50, 50, "./assets/undo.png");
-    clearButton = new Image(x, y + 300, 50, 50, "./assets/clear.png");
+    undoButton = new Image(x, y + 300, 50, 50, "./assets/undo.png");
+    clearButton = new Image(x, y + 350, 50, 50, "./assets/clear.png");
 
     tool = PENCIL;
     action = NONE;

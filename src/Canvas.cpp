@@ -3,6 +3,7 @@
 #include "Scribble.h"
 #include "Triangle.h"
 #include <GL/freeglut.h>
+#include <GL/gl.h>
 #include <cstdlib>
 
 Canvas::Canvas(int x, int y, int w, int h) : Canvas_(x, y, w, h) {
@@ -21,9 +22,12 @@ void Canvas::addCircle(float x, float y, float r, float g, float b) {
     shapes.push_back(new Circle(x, y, r, g, b));
 }
 
-void Canvas::addPolygon(float x, float y, int sides, float radius, float r, float g, float b) {
-    shapes.push_back(new Polygon(x, y, sides, radius, r, g, b));
+void Canvas::addPolygon(float x, float y, float r, float g, float b) {
+    //std::cout << "Adding polygon at (" << x << ", " << y << ") with radius 0.5\n";  // Debugging output
+    shapes.push_back(new Polygon(x, y, r, g, b));
 }
+
+
 
 void Canvas::addTriangle(float x, float y, float r, float g, float b) {
     shapes.push_back(new Triangle(x, y, r, g, b));
@@ -44,6 +48,7 @@ void Canvas::undo(){
 }
 
 void Canvas::render() {
+    glClear(GL_COLOR_BUFFER_BIT); // screen clear before render
     for (unsigned int i = 0 ; i < shapes.size(); i++) {
         shapes[i]->draw();
     }
@@ -51,6 +56,7 @@ void Canvas::render() {
     if (curr){
         curr->draw();
     }
+    glFlush(); 
 }
 
 void Canvas::startScribble(){
@@ -69,3 +75,12 @@ void Canvas::endScribble(){
         curr = nullptr;
     }
 }
+
+// void Canvas::selectShape(float mx, float my) {
+//     for (auto& shape : shapes) {
+//         if (shape->contains(mx, my)) {  // Assuming you have a 'contains' method in your shapes to check if the point is inside the shape
+//             selectedShape = shape;  // Set the clicked shape as the selected shape
+//             break;
+//         }
+//     }
+// }

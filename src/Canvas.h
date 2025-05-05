@@ -25,13 +25,15 @@ public:
 
     void addCircle(float x, float y, float r, float g, float b);
 
-    void addPolygon(float x, float y, int sides, float radius, float r, float g, float b);
+    void addPolygon(float x, float y, float r, float g, float b);
 
     void addTriangle(float x, float y, float r, float g, float b);
 
     void clear();
 
     void undo();
+
+    void selectShape(float mx, float my);
 
     void startScribble();
 
@@ -40,6 +42,7 @@ public:
     void endScribble();
 
     void render();
+
 };
 
 #endif
