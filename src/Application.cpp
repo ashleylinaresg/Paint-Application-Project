@@ -69,9 +69,18 @@ void Application::onToolbarChange(bobcat::Widget* sender) {
     if (action == CLEAR) {
         canvas->clear();
         canvas->redraw();
+        action = NONE;
     }
     else if (action == UNDO) {
         canvas->undo();
+        canvas->redraw();
+    }
+    else if (action == BRING_TO_FRONT) {
+        canvas->bringToFront();  // Call bringToFront method
+        canvas->redraw();
+    }
+    else if (action == SEND_TO_BACK) {
+        canvas->sendToBack();    // Call sendToBack method
         canvas->redraw();
     }
 }
@@ -79,6 +88,10 @@ void Application::onToolbarChange(bobcat::Widget* sender) {
 void Application::onCanvasMouseWheel(bobcat::Widget* sender, float mx, float my, int z) {
     float scaleFactor = (z > 0) ? 1.1f : 0.9f;  // Zoom in (scale up) or zoom out (scale down)
 
+    if (scaleFactor <= 0) {
+        std::cerr << "Invalid scale factor: " << scaleFactor << std::endl;
+        return;  // Prevent resizing if scale factor is invalid
+    }
     // Resize the selected shape by the scale factor
     canvas->resizeShape(scaleFactor);
 }

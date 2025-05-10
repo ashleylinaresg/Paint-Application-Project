@@ -2,6 +2,7 @@
 #include <GL/freeglut.h>
 #include <GL/gl.h>
 #include <cmath>
+#include <iostream>
 
 bool Circle::contains(float mx, float my) const {
     float dist = sqrt((mx - x) * (mx - x) + (my - y) * (my - y));
@@ -37,3 +38,10 @@ void Circle::draw() {
     glEnd();
 }
 
+void Circle::resize(float scaleFactor) {
+    if (scaleFactor <= 0) {
+        std::cerr << "Invalid scale factor: " << scaleFactor << std::endl;
+        return;  // Prevent resizing if scale factor is invalid
+    }
+    radius *= scaleFactor;  // Resize the radius of the circle
+}

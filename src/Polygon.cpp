@@ -1,7 +1,7 @@
 #include "Polygon.h"
 #include <GL/freeglut.h>
 #include <cmath> 
-//#include <algorithm>
+#include <iostream>
 
 bool Polygon::contains(float mx, float my) const {
     int i, j, n = sides;
@@ -45,5 +45,9 @@ void Polygon::draw() {
 }
 
 void Polygon::resize(float scaleFactor) {
+    if (scaleFactor <= 0) {
+        std::cerr << "Invalid scale factor: " << scaleFactor << std::endl;
+        return;  // Prevent resizing if scale factor is invalid
+    }
     radius *= scaleFactor;  // Scale the radius
 }

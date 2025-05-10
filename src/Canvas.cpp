@@ -5,6 +5,7 @@
 #include <GL/freeglut.h>
 #include <GL/gl.h>
 #include <cstdlib>
+#include <algorithm>
 
 Canvas::Canvas(int x, int y, int w, int h) : Canvas_(x, y, w, h) {
     curr = nullptr;
@@ -41,6 +42,7 @@ void Canvas::clear() {
         delete shapes[i];
     }
     shapes.clear();
+    redraw();
 }
 
 void Canvas::undo(){
@@ -106,13 +108,37 @@ void Canvas::onCanvasDrag(bobcat::Widget* sender, float mx, float my) {
         redraw();  // Redraw the canvas after moving the shape
     }
 
-    lastMouseX = mx;  // Update the last mouse x position
-    lastMouseY = my;  // Update the last mouse y position
+    lastMouseX = mx; 
+    lastMouseY = my; 
 }
 
 void Canvas::resizeShape(float scaleFactor) {
+    if (scaleFactor <= 0) {
+        std::cerr << "Invalid scale factor: " << scaleFactor << std::endl;
+        return;  // Prevent resizing if scale factor is invalid
+    }
     if (selectedShape) {
         selectedShape->resize(scaleFactor);  // Call resize on the selected shape
         redraw();  // Redraw the canvas after resizing
+    }
+}
+
+void Canvas::bringToFront() {
+    if (selectedShape) {
+        auto it = std::find(shapes.begin(), shapes.end(), selectedShape);
+        if (it != shapes.end()) {
+            shapes.erase(it);            // Remove the selected shape from the vector
+            shapes.push_back(selectedShape);  // Add it to the end 
+        }
+    }
+}
+
+void Canvas::sendToBack() {
+    if (selectedShape) {
+        auto it = std::find(shapes.begin(), shapes.end(), selectedShape);
+        if (it != shapes.end()) {
+            shapes.erase(it);            // Remove the selected shape from the vector
+            shapes.insert(shapes.begin(), selectedShape);  // Add it to the beginning
+        }
     }
 }

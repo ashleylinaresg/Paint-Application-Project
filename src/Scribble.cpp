@@ -1,4 +1,5 @@
 #include "Scribble.h"
+#include <iostream>
 
 void Scribble::addPoint(float x, float y, float r, float g, float b, int size){
     points.push_back(new Point(x, y, r, g, b, size));
@@ -18,6 +19,10 @@ Scribble::~Scribble(){
 }
 
 void Scribble::resize(float scaleFactor) {
+    if (scaleFactor <= 0) {
+        std::cerr << "Invalid scale factor: " << scaleFactor << std::endl;
+        return;  // Prevent resizing if scale factor is invalid
+    }
     for (auto& point : points) {
         point->resize(scaleFactor);  // Resize each point inside the scribble
     }

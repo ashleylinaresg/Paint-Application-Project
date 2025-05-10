@@ -12,6 +12,9 @@ void Toolbar::deselectAllTools() {
     rectangleButton->color(FL_BACKGROUND_COLOR);
     polygonButton->color(FL_BACKGROUND_COLOR);
     undoButton->color(FL_BACKGROUND_COLOR);
+    clearButton->color(FL_BACKGROUND_COLOR);
+    bringToFrontButton->color(FL_BACKGROUND_COLOR);
+    sendToBackButton->color(FL_BACKGROUND_COLOR);
 }
 
 void Toolbar::visualizeSelectedTool() {
@@ -64,6 +67,12 @@ void Toolbar::onClick(bobcat::Widget* sender) {
     else if (sender == clearButton) {
         action = CLEAR;
     }
+    else if (sender == bringToFrontButton) {
+        action = BRING_TO_FRONT;
+    }
+    else if (sender == sendToBackButton) {
+        action = SEND_TO_BACK;
+    }
 
     if (onChangeCb) {
         onChangeCb(this);
@@ -90,6 +99,9 @@ Toolbar::Toolbar(int x, int y, int w, int h) : Group(x, y, w, h) {
     polygonButton = new Image(x, y + 250, 50, 50, "./assets/polygon.png");
     undoButton = new Image(x, y + 300, 50, 50, "./assets/undo.png");
     clearButton = new Image(x, y + 350, 50, 50, "./assets/clear.png");
+    bringToFrontButton = new bobcat::Image(x, y + 400, 50, 50, "./assets/bring-to-front.png");
+    sendToBackButton = new bobcat::Image(x, y + 450, 50, 50, "./assets/send-to-back.png");
+    
 
     tool = PENCIL;
     action = NONE;
@@ -113,4 +125,6 @@ Toolbar::Toolbar(int x, int y, int w, int h) : Group(x, y, w, h) {
     ON_CLICK(polygonButton, Toolbar::onClick);
     ON_CLICK(undoButton, Toolbar::onClick);
     ON_CLICK(clearButton, Toolbar::onClick);
+    ON_CLICK(bringToFrontButton, Toolbar::onClick);
+    ON_CLICK(sendToBackButton, Toolbar::onClick);
 }

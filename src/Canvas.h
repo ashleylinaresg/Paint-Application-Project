@@ -43,8 +43,8 @@ public:
     void moveShape(float dx, float dy);  // Move selected shape
     void resizeShape(float scaleFactor);
 
-    // a getter for selectedShape (optional)
-    //Shape* getSelectedShape() const { return selectedShape; }
+    void bringToFront();
+    void sendToBack();
 
 };
 

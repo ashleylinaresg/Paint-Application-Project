@@ -2,6 +2,7 @@
 #include "Triangle.h"
 #include <GL/freeglut.h>
 #include <cmath>
+#include <iostream>
 
 bool Triangle::contains(float mx, float my) const {
     // Vertices of the triangle
@@ -14,6 +15,16 @@ bool Triangle::contains(float mx, float my) const {
 
     // Area of the full triangle
     float area = 0.5f * (-y2 * x3 + y1 * (-x2 + x3) + x1 * (y2 - y3) + x2 * y3);
+    if (area == 0) {
+        std::cerr << "Error: Area is zero, invalid triangle." << std::endl;
+        return false;  // If area is zero, the point is outside the triangle
+    }
+
+    // Continue with the logic to check if the point is inside the triangle
+    float s = 1 / (2 * area) * (y1 * x2 - x1 * y2 + (y2 - y1) * mx + (x1 - x2) * my);
+    float t = 1 / (2 * area) * (x1 * y3 - y1 * x3 + (y1 - y3) * mx + (x3 - x1) * my);
+
+    return s > 0 && t > 0 && (s + t) < 1;
 
     // Areas of the smaller triangles formed with the point (mx, my)
     float area1 = 0.5f * (-y2 * mx + y1 * (-x2 + mx) + x1 * (y2 - my) + x2 * my);
@@ -62,6 +73,10 @@ void Triangle::draw() {
 }
 
 void Triangle::resize(float scaleFactor) {
+    if (scaleFactor <= 0) {
+        std::cerr << "Invalid scale factor: " << scaleFactor << std::endl;
+        return;  // Prevent resizing if scale factor is invalid
+    }
     width *= scaleFactor;
     height *= scaleFactor;
 }

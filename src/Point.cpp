@@ -1,5 +1,6 @@
 #include "Point.h"
 #include <GL/freeglut.h>
+#include <iostream>
 
 Point::Point() {
     x = 0.0;
@@ -59,5 +60,9 @@ int Point::getSize() const {
 }
 
 void Point::resize(float scaleFactor) {
+    if (scaleFactor <= 0) {
+        std::cerr << "Invalid scale factor: " << scaleFactor << std::endl;
+        return;  // Prevent resizing if scale factor is invalid
+    }
     size *= scaleFactor; 
 }

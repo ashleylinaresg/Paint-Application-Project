@@ -1,5 +1,6 @@
 #include "Rectangle.h"
 #include <GL/freeglut.h>
+#include <iostream>
 
 bool Rectangle::contains(float mx, float my) const {
     return (mx >= x - width / 2 && mx <= x + width / 2 && my >= y - height / 2 && my <= y + height / 2);
@@ -37,6 +38,10 @@ void Rectangle::draw() {
 }
 
 void Rectangle::resize(float scaleFactor) {
+    if (scaleFactor <= 0) {
+        std::cerr << "Invalid scale factor: " << scaleFactor << std::endl;
+        return;  // Prevent resizing if scale factor is invalid
+    }
     width *= scaleFactor;
     height *= scaleFactor;
 }
