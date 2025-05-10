@@ -35,3 +35,8 @@ void Rectangle::draw() {
         glVertex2f(x - width/2, y - height/2);
     glEnd();
 }
+
+void Rectangle::resize(float scaleFactor) {
+    width *= scaleFactor;
+    height *= scaleFactor;
+}

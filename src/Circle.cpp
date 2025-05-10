@@ -36,3 +36,4 @@ void Circle::draw() {
         }
     glEnd();
 }
+

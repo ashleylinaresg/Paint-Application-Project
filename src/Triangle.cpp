@@ -60,3 +60,8 @@ void Triangle::draw() {
         glVertex2f(x + hw,  y - hh);
     glEnd();
 }
+
+void Triangle::resize(float scaleFactor) {
+    width *= scaleFactor;
+    height *= scaleFactor;
+}

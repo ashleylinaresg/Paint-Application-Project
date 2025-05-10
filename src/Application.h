@@ -17,6 +17,7 @@ class Application : public bobcat::Application_ {
     void onCanvasDrag(bobcat::Widget* sender, float mx, float my);
     void onToolbarChange(bobcat::Widget* sender);
     void onCanvasMouseUp(bobcat::Widget* sender, float mx, float my);
+    void onCanvasMouseWheel(bobcat::Widget* sender, float mx, float my, int z);
 
 public:
     Application();

@@ -14,6 +14,8 @@ public:
     void draw() override;
     ~Scribble();
 
+    void resize(float scaleFactor) override;
+
     // Implement contains for Scribble
     bool contains(float mx, float my) const override {
         for (const auto& point : points) {

@@ -13,13 +13,8 @@ class Triangle : public Shape {
     float b;      // blue  component
 
 public:
-    // default: center at (0,0), width=0.4, height=0.4, color=black
     Triangle();
-
-    // specify center, color; width/height stay at their default values
     Triangle(float x, float y, float r, float g, float b);
-
-    // draw an isosceles triangle with its base horizontal
     void draw() override;
 
     bool contains(float mx, float my) const override;
@@ -29,6 +24,8 @@ public:
         x += dx;
         y += dy;
     }
+
+    void resize(float scaleFactor) override;
 };
 
 #endif // TRIANGLE_H

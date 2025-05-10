@@ -57,3 +57,7 @@ float Point::getB() const {
 int Point::getSize() const {
     return size;
 }
+
+void Point::resize(float scaleFactor) {
+    size *= scaleFactor; 
+}

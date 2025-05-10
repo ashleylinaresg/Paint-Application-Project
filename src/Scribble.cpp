@@ -16,3 +16,9 @@ Scribble::~Scribble(){
     }
     points.clear();
 }
+
+void Scribble::resize(float scaleFactor) {
+    for (auto& point : points) {
+        point->resize(scaleFactor);  // Resize each point inside the scribble
+    }
+}

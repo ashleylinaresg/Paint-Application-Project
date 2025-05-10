@@ -16,7 +16,9 @@ class Canvas : public bobcat::Canvas_ {
 
     Scribble* curr;
     Shape* selectedShape;  // Declare selectedShape var
-
+    float lastMouseX;  // To store the last mouse X position
+    float lastMouseY;  // To store the last mouse Y position
+ 
 public:
     Canvas(int x, int y, int w, int h);
 
@@ -36,8 +38,13 @@ public:
 
     void render();
 
+    void onCanvasDrag(bobcat::Widget* sender, float mx, float my);
+
+    void moveShape(float dx, float dy);  // Move selected shape
+    void resizeShape(float scaleFactor);
+
     // a getter for selectedShape (optional)
-    Shape* getSelectedShape() const { return selectedShape; }
+    //Shape* getSelectedShape() const { return selectedShape; }
 
 };
 

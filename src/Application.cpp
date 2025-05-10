@@ -76,6 +76,14 @@ void Application::onToolbarChange(bobcat::Widget* sender) {
     }
 }
 
+void Application::onCanvasMouseWheel(bobcat::Widget* sender, float mx, float my, int z) {
+    float scaleFactor = (z > 0) ? 1.1f : 0.9f;  // Zoom in (scale up) or zoom out (scale down)
+
+    // Resize the selected shape by the scale factor
+    canvas->resizeShape(scaleFactor);
+}
+
+
 Application::Application() {
     window = new Window(100, 100, 400, 400, "Paint Application");
 

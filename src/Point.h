@@ -20,6 +20,8 @@ public:
 
     void draw() override;
 
+    void resize(float scaleFactor) override;
+
     float getX() const;
     float getY() const;
     float getR() const;
@@ -27,7 +29,6 @@ public:
     float getB() const;
     int getSize() const;
 
-    // Implement contains for Point
     bool contains(float mx, float my) const override {
         // A point "contains" another point if they are very close
         float distance = sqrt((mx - x) * (mx - x) + (my - y) * (my - y));

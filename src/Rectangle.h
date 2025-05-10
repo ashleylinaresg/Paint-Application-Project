@@ -24,6 +24,8 @@ public:
         y += dy;
     }
 
+    void resize(float scaleFactor) override;
+
 };
 
 #endif

@@ -23,6 +23,9 @@ public:
         x += dx;
         y += dy;
     }
+
+    void resize(float scaleFactor) override;
+
 };
 
 #endif

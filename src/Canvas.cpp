@@ -8,7 +8,9 @@
 
 Canvas::Canvas(int x, int y, int w, int h) : Canvas_(x, y, w, h) {
     curr = nullptr;
-    selectedShape = nullptr;  // initialize selectedShape to nullptr
+    selectedShape = nullptr; 
+    lastMouseX = 0.0f;  
+    lastMouseY = 0.0f;  
 }
 
 void Canvas::addPoint(float x, float y, float r, float g, float b, int size) {
@@ -108,3 +110,9 @@ void Canvas::onCanvasDrag(bobcat::Widget* sender, float mx, float my) {
     lastMouseY = my;  // Update the last mouse y position
 }
 
+void Canvas::resizeShape(float scaleFactor) {
+    if (selectedShape) {
+        selectedShape->resize(scaleFactor);  // Call resize on the selected shape
+        redraw();  // Redraw the canvas after resizing
+    }
+}

@@ -43,3 +43,7 @@ void Polygon::draw() {
         }
     glEnd();
 }
+
+void Polygon::resize(float scaleFactor) {
+    radius *= scaleFactor;  // Scale the radius
+}
