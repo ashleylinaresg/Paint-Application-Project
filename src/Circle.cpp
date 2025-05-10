@@ -3,6 +3,11 @@
 #include <GL/gl.h>
 #include <cmath>
 
+bool Circle::contains(float mx, float my) const {
+    float dist = sqrt((mx - x) * (mx - x) + (my - y) * (my - y));
+    return dist <= radius;
+}
+
 Circle::Circle() {
     x = 0.0;
     y = 0.0;

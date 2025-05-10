@@ -7,12 +7,12 @@ using namespace std;
 
 void Application::onCanvasMouseDown(bobcat::Widget* sender, float mx, float my) {
     TOOL tool        = toolbar->getTool();
-    //std::cout << "Selected tool: " << tool << std::endl; // Debugging output
-
     Color color      = selector->getColor();
     float  r         = color.getR();
     float  g         = color.getG();
     float  b         = color.getB();
+
+    canvas->selectShape(mx, my);
 
     if (tool == PENCIL) {
         canvas->startScribble();

@@ -14,7 +14,15 @@ class Circle : public Shape{
 public:
     Circle();
     Circle(float x, float y, float r, float g, float b);
-    void draw();
+    void draw() override;
+
+    bool contains(float mx, float my) const override;
+    
+    // Override moveBy to move the circle
+    void moveBy(float dx, float dy) override {
+        x += dx;
+        y += dy;
+    }
 };
 
 #endif

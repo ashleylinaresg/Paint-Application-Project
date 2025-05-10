@@ -6,17 +6,24 @@
 #include <vector>
 
 class Polygon : public Shape {
-    float x;        // center x
-    float y;        // center y
-    int sides;      // number of sides (>=3)
-    float radius;   // distance from center to any vertex
-    float r, g, b;  // color
+    float x;        
+    float y;        
+    int sides;      
+    float radius;   
+    float r, g, b;  
 
 public:
     Polygon();  
     // specify center, # of sides, radius, and color
     Polygon(float x, float y, float r, float g, float b, int sides = 5); // constructor
-    void draw();
+    void draw() override;
+
+    bool contains(float mx, float my) const override;
+
+    void moveBy(float dx, float dy) override {
+        x += dx;
+        y += dy;
+    }
 
 };
 

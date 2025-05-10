@@ -8,10 +8,11 @@
 class Shape{
 
 public:
-    // This function is now pure virtual
     virtual void draw() = 0;
 
-   // virtual bool contains(float mx, float my) = 0;
+    virtual bool contains(float mx, float my) const = 0;
+    
+    virtual void moveBy(float dx, float dy) = 0;
 
     virtual ~Shape(){}
 };

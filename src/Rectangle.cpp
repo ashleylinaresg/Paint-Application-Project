@@ -1,6 +1,10 @@
 #include "Rectangle.h"
 #include <GL/freeglut.h>
 
+bool Rectangle::contains(float mx, float my) const {
+    return (mx >= x - width / 2 && mx <= x + width / 2 && my >= y - height / 2 && my <= y + height / 2);
+}
+
 Rectangle::Rectangle() {
     x = 0.0;
     y = 0.0;

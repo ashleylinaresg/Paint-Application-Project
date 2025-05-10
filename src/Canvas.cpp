@@ -8,6 +8,7 @@
 
 Canvas::Canvas(int x, int y, int w, int h) : Canvas_(x, y, w, h) {
     curr = nullptr;
+    selectedShape = nullptr;  // initialize selectedShape to nullptr
 }
 
 void Canvas::addPoint(float x, float y, float r, float g, float b, int size) {
@@ -76,11 +77,34 @@ void Canvas::endScribble(){
     }
 }
 
-// void Canvas::selectShape(float mx, float my) {
-//     for (auto& shape : shapes) {
-//         if (shape->contains(mx, my)) {  // Assuming you have a 'contains' method in your shapes to check if the point is inside the shape
-//             selectedShape = shape;  // Set the clicked shape as the selected shape
-//             break;
-//         }
-//     }
-// }
+void Canvas::selectShape(float mx, float my) {
+    for (auto& shape : shapes) {
+        // Check if the shape contains the point (mx, my)
+        if (shape->contains(mx, my)) {  
+            selectedShape = shape;  // Set the clicked shape as the selected shape
+            break;
+        }
+    }
+}
+
+void Canvas::moveShape(float dx, float dy) {
+    if (selectedShape) {
+        // Move the selected shape by dx and dy
+        selectedShape->moveBy(dx, dy);
+    }
+}
+
+void Canvas::onCanvasDrag(bobcat::Widget* sender, float mx, float my) {
+    if (selectedShape) {
+        float dx = mx - lastMouseX;  // Calculate the change in x position
+        float dy = my - lastMouseY;  // Calculate the change in y position
+
+        // Move the selected shape
+        selectedShape->moveBy(dx, dy);
+        redraw();  // Redraw the canvas after moving the shape
+    }
+
+    lastMouseX = mx;  // Update the last mouse x position
+    lastMouseY = my;  // Update the last mouse y position
+}
+

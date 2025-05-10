@@ -21,6 +21,14 @@ public:
 
     // draw an isosceles triangle with its base horizontal
     void draw() override;
+
+    bool contains(float mx, float my) const override;
+
+    // Override moveBy to move the triangle
+    void moveBy(float dx, float dy) override {
+        x += dx;
+        y += dy;
+    }
 };
 
 #endif // TRIANGLE_H

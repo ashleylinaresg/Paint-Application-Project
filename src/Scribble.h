@@ -11,9 +11,23 @@ class Scribble: public Shape {
 public:
 
     void addPoint(float x, float y, float r, float g, float b, int size);
-
-    void draw();
-
+    void draw() override;
     ~Scribble();
+
+    // Implement contains for Scribble
+    bool contains(float mx, float my) const override {
+        for (const auto& point : points) {
+            if (point->contains(mx, my)) {
+                return true; 
+            }
+        }
+        return false;  // No point containing (mx, my)
+    }
+
+    void moveBy(float dx, float dy) override {
+        for (auto& point : points) {
+            point->moveBy(dx, dy);  // Move each point inside the scribble
+        }
+    }
 };
 #endif

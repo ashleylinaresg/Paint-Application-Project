@@ -3,6 +3,23 @@
 #include <cmath> 
 //#include <algorithm>
 
+bool Polygon::contains(float mx, float my) const {
+    int i, j, n = sides;
+    bool inside = false;
+
+    for (i = 0, j = n - 1; i < n; j = i++) {
+        float xi = x + radius * cos(2 * M_PI * i / n);
+        float yi = y + radius * sin(2 * M_PI * i / n);
+        float xj = x + radius * cos(2 * M_PI * j / n);
+        float yj = y + radius * sin(2 * M_PI * j / n);
+
+        if ((yi > my) != (yj > my) && (mx < (xj - xi) * (my - yi) / (yj - yi) + xi)) {
+            inside = !inside;
+        }
+    }
+    return inside;
+}
+
 
 Polygon::Polygon(float x, float y, float r, float g, float b, int sides) {
     this->x      = x;
